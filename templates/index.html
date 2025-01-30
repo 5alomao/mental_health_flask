@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Deployment ML Project</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arimo"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hind:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='css/style.css') }}"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+
+  <body>
+    <img id="hero-bg" src="/static/assets/hero-bg.jpg" alt="Abstract Image" />
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+      <h2>Saúde Mental no Trabalho <i class="fa-solid fa-brain"></i></h2>
+
+      <div>
+        <label>Qual sua idade?</label>
+        <input
+          type="number"
+          name="age"
+          placeholder="Idade"
+          required="required"
+        />
+      </div>
+
+      <div>
+        <label>Possui histórico familiar?</label>
+        <div class="radio-group">
+          <label
+            ><input type="radio" name="family_history" value="1" required />
+            Sim</label
+          >
+          <label
+            ><input type="radio" name="family_history" value="0" required />
+            Não</label
+          >
+        </div>
+      </div>
+
+      <div>
+        <label>Interfere no trabalho?</label>
+        <div class="radio-group">
+          <label
+            ><input type="radio" name="work_interfere" value="0" required />
+            Muitas vezes</label
+          >
+          <label
+            ><input type="radio" name="work_interfere" value="1" required /> Às
+            vezes</label
+          >
+          <label
+            ><input type="radio" name="work_interfere" value="2" required />
+            Raramente</label
+          >
+          <label
+            ><input type="radio" name="work_interfere" value="3" required />
+            Nunca</label
+          >
+          <label
+            ><input type="radio" name="work_interfere" value="4" required />
+            NA</label
+          >
+        </div>
+      </div>
+
+      <div>
+        <label for="remote_work">Trabalha Remotamente?</label>
+        <div class="radio-group">
+          <label
+            ><input type="radio" name="remote_work" value="1" required />
+            Sim</label
+          >
+          <label
+            ><input type="radio" name="remote_work" value="0" required />
+            Não</label
+          >
+        </div>
+      </div>
+
+      <button type="submit" id="btn-form">Classificar</button>
+    </form>
+
+    <div id="text">{{ prediction_text }}</div>
+  </body>
+</html>
